@@ -18,5 +18,7 @@ Route::get('/', function () {
     return redirect('tasks');
 });
 
+Route::get('/tasks/{task}/confirm_delete', [TaskController::class, 'confirmDelete'])->name('tasks.confirm_delete');
+
 Route::resource('tasks', TaskController::class)
-    ->only(['index', 'create', 'store']);
+    ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);

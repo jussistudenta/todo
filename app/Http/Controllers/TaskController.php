@@ -45,17 +45,17 @@ class TaskController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Task $task)
-    {
-        //
-    }
+    // public function show(Task $task)
+    // {
+    //     //
+    // }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Task $task)
     {
-        //
+        return view('tasks.edit', ['task' => $task]);
     }
 
     /**
@@ -63,14 +63,28 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required',
+            'description' => 'required'
+        ]);
+
+        $task->update($validated);
+        $task->save();
+
+        return redirect(route('tasks.index'));
+    }
+
+    public function confirmDelete(Task $task) {
+        return view('tasks.confirm_delete', ['task' => $task]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Task $task)
+    public function destroy(Task $task): RedirectResponse
     {
-        //
+        $task->delete();
+
+        return redirect('tasks');
     }
 }
