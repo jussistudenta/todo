@@ -1,17 +1,17 @@
 @props(['tasks'])
 
 <div class="text-center border-bottom pb-4 mb-4">
-    <h2>Tasks</h2>
+    <h2>Tehtävät asiat</h2>
 
-    <a href="{{ route('tasks.create') }}" class="btn btn-primary">Add Task</a>
+    <a href="{{ route('tasks.create') }}" class="btn btn-primary">Lisää tehtävä</a>
 </div>
 
 @if (count($tasks) > 0)
     <table class="table">
         <thead>
             <tr>
-                <th>Title</th>
-                <th>Description</th>
+                <th>Nimi</th>
+                <th>Kuvaus</th>
                 <th></th>
                 <th></th>
             </tr>
@@ -25,12 +25,12 @@
                     </td>
                     <td style="width: 10%">
                         <a class="btn btn-secondary" href="{{ route('tasks.edit', $task->id) }}">
-                            Edit
+                            Muokkaa
                         </a> &nbsp;
                     </td>
                     <td style="width: 10%">
                         <a class="btn btn-danger" href="{{ route('tasks.confirm_delete', $task->id) }}">
-                            Delete
+                            Poista
                         </a>
                     </td>
                 </tr>
