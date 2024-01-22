@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -13,9 +14,9 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::all();
-
-        return view('tasks.index', ['tasks' => $tasks]);
+        return view('tasks.index', ['tasks' =>
+            Task::with('user')->whereBelongsTo(auth()->user())->get(),
+        ]);
     }
 
     /**
@@ -36,8 +37,7 @@ class TaskController extends Controller
             'description' => 'required'
         ]);
 
-        $task = new Task($validated);
-        $task->save();
+        $request->user()->tasks()->create($validated);
 
         return redirect(route('tasks.index'));
     }

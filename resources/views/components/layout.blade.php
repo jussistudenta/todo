@@ -16,10 +16,12 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            @if(auth()->user())
               <li class="nav-item">
                 <a class="nav-link text-light mx-4 btn btn-secondary" aria-current="page" href="{{ route('home') }}">Koti</a>
               </li>
 
+              <!-- Lisää tehtävä -valinta -->
               <li class="nav-item">
                 <a class="nav-link text-light mx-4 btn btn-secondary" href="{{ route('tasks.create') }}">Lisää tehtävä</a>
               </li>
@@ -29,10 +31,14 @@
                 <a class="nav-link text-light mx-4 btn btn-secondary" href="{{ route('feedbacks.create') }}">Anna palautetta</a>
               </li>
 
-              <!-- Palautteet -valinta -->
+              <!-- Kirjaudu ulos -valinta -->
               <li class="nav-item">
-                <a class="nav-link text-light mx-4 btn btn-secondary" href="{{ route('feedbacks.index') }}">Palautteet</a>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button class="btn btn-secondary">Kirjaudu ulos</button>
+                </form>
               </li>
+            @endif
           </div>
         </div>
       </nav>

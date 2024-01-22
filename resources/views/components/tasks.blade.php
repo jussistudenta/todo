@@ -18,6 +18,7 @@
         </thead>
         <tbody>
             @foreach ($tasks as $task)
+                @if ($task->user->is(auth()->user()))
                 <tr>
                     <td>{{ $task->title }}</td>
                     <td>
@@ -34,6 +35,7 @@
                         </a>
                     </td>
                 </tr>
+                @endif
             @endforeach
         </tbody>
     </table>
